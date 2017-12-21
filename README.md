@@ -2,7 +2,7 @@
 
 [![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg)](#badge)
 
-This is a plugin to use [DynamoDB] (https://aws.amazon.com/dynamodb/) with Hemera 
+This is a plugin to use [DynamoDB](https://aws.amazon.com/dynamodb/) with Hemera 
 
 ## Install
 
@@ -44,4 +44,4 @@ npm run test
 
 ## Examples
 
-[Here] (https://aws.amazon.com/dynamodb/) you can find examples to see how to use it with Hemera 
+[Here](https://aws.amazon.com/dynamodb/) you can find examples to see how to use it with Hemera 
