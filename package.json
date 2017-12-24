@@ -44,7 +44,7 @@
     "eslint-plugin-prettier": "^2.4.0",
     "eslint-plugin-promise": "^3.6.0",
     "eslint-plugin-standard": "^3.0.1",
-    "hemera-testsuite": "^1.4.1",
+    "hemera-testsuite": "^2.0.3",
     "mocha": "^4.0.1",
     "nats": "^0.7.24",
     "nats-hemera": "^3.0.2",

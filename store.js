@@ -36,7 +36,7 @@ class DynamoStore extends Store {
       Item: req.data
     }
     this._driver.put(params, function (err, data) {
-      if (err) return err
+      if (err) cb(err)
       cb(null, params.Item)
     })
   }
@@ -58,7 +58,7 @@ class DynamoStore extends Store {
       ReturnValues: 'ALL_OLD'
     }
     this._driver.delete(params, function (err, data) {
-      if (err) return err
+      if (err) cb(err)
       cb(null, data)
     })
   }
@@ -84,7 +84,7 @@ class DynamoStore extends Store {
     }
  
     this._driver.update(params, function (err, data) {
-      if (err) return err
+      if (err) cb(err)
       cb(null, data)
     })
   }
@@ -130,7 +130,7 @@ class DynamoStore extends Store {
      params = Object.assign(params, req.options)
     }
     this._driver.query(params, function (err, data) {
-      if (err) return err
+      if (err) cb(err)
       cb(null, data)
     })
   }
@@ -152,7 +152,7 @@ class DynamoStore extends Store {
      params = Object.assign(params, req.options)
     }
     this._driver.scan(params, function (err, data) {
-      if (err) return err
+      if (err) cb(err)
       cb(null, data)
     })
   }
