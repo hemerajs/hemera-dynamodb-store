@@ -9,3 +9,4 @@
 /tests_integration/cli/
 .nyc_output
 coverage
+.dynamodblocal-bin

@@ -4,13 +4,13 @@ const Hp = require('hemera-plugin')
 const AWS = require('aws-sdk')
 const DynamoStore = require('./store')
 const StorePattern = require('hemera-store/pattern')
-const Joi = require('joi')
 
 function hemeraDynamoStore(hemera, opts, done) {
   let topic = 'dynamo-store'
+  let Joi = hemera.joi
 
-  var dynamo = new AWS.DynamoDB(opts.dynamodb)
-  var db = new AWS.DynamoDB.DocumentClient(opts.dynamodb, dynamo)
+  const dynamo = new AWS.DynamoDB(opts.dynamodb)
+  const db = new AWS.DynamoDB.DocumentClient(opts.dynamodb, dynamo)
 
   function createDb() {
     return dynamo
@@ -40,10 +40,12 @@ function hemeraDynamoStore(hemera, opts, done) {
     cmd: 'updateById',
     id: Joi.required(),
     collection: Joi.string().required(),
-    UpdateExpression: Joi.string().required,
-    ConditionExpression: Joi.string(),
-    ExpressionAttributeNames: Joi.object(),
-    ExpressionAttributeValues: Joi.object()
+    options: Joi.object().keys({
+      UpdateExpression: Joi.string().required(),
+      ConditionExpression: Joi.string(),
+      ExpressionAttributeNames: Joi.object(),
+      ExpressionAttributeValues: Joi.object()
+    })  
   }, function (req, cb) {
     const store = new DynamoStore(db)
     store.updateById(req, cb)
@@ -54,8 +56,10 @@ function hemeraDynamoStore(hemera, opts, done) {
     cmd: 'findById',
     id: Joi.required(),
     collection: Joi.string().required(),
-    ProjectionExpression: Joi.string(),
-    ExpressionAttributeNames: Joi.object()
+    options: Joi.object().keys({
+      ProjectionExpression: Joi.string(),
+      ExpressionAttributeNames: Joi.object()
+    })  
   }, function (req, cb) {
     const store = new DynamoStore(db)
     store.findById(req, cb)
@@ -65,11 +69,13 @@ function hemeraDynamoStore(hemera, opts, done) {
     topic,
     cmd: 'query',
     collection: Joi.string().required(),
-    KeyConditionExpression: Joi.string().required(),
-    FilterExpression: Joi.string(),
-    ProjectionExpression: Joi.string(),
-    ExpressionAttributeNames: Joi.object(),
-    ExpressionAttributeValues: Joi.object()
+    options: Joi.object().keys({
+      KeyConditionExpression: Joi.string().required(),
+      FilterExpression: Joi.string(),
+      ProjectionExpression: Joi.string(),
+      ExpressionAttributeNames: Joi.object(),
+      ExpressionAttributeValues: Joi.object()
+    })   
   }, function (req, cb) {
     const store = new DynamoStore(db)
     store.query(req, cb)
@@ -79,15 +85,16 @@ function hemeraDynamoStore(hemera, opts, done) {
     topic,
     cmd: 'scan',
     collection: Joi.string().required(),
-    FilterExpression: Joi.string(),
-    ProjectionExpression: Joi.string(),
-    ExpressionAttributeNames: Joi.object(),
-    ExpressionAttributeValues: Joi.object()
+    options: Joi.object().keys({
+      FilterExpression: Joi.string(),
+      ProjectionExpression: Joi.string(),
+      ExpressionAttributeNames: Joi.object(),
+      ExpressionAttributeValues: Joi.object()
+    })    
   }, function (req, cb) {
     const store = new DynamoStore(db)
     store.scan(req, cb)
   })
-
   done()
 }
 

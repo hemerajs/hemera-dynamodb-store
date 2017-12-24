@@ -52,10 +52,12 @@ hemera.ready(() => {
       cmd: 'updateById',
       id: '1111',
       collection: 'test',
-      UpdateExpression: 'set #city = :city, #country = :country',
-      ConditionExpression: '#name = :name',
-      ExpressionAttributeNames: { '#name': 'name', '#city': 'city', '#country': 'country'},
-      ExpressionAttributeValues: { ':name': 'John Doe', ':city': 'Skopje', ':country': 'Macedonia'}
+      options: {
+        UpdateExpression: 'set #city = :city, #country = :country',
+        ConditionExpression: '#name = :name',
+        ExpressionAttributeNames: { '#name': 'name', '#city': 'city', '#country': 'country'},
+        ExpressionAttributeValues: { ':name': 'John Doe', ':city': 'Skopje', ':country': 'Macedonia'}
+      }  
     },
     function(err, resp) {
       if (err) this.log.info(err, 'Errors occured')
@@ -67,10 +69,12 @@ hemera.ready(() => {
     {
       topic: 'dynamo-store',
       cmd: 'findById',
-      collection: 'test',
       id: '1111',
-      ProjectionExpression: '#name,#city',
-      ExpressionAttributeNames: {'#name': 'name', '#city': 'city'}
+      collection: 'test',
+      options: {
+        ProjectionExpression: '#name,#city',
+        ExpressionAttributeNames: {'#name': 'name', '#city': 'city'}
+      }    
     },
     function(err, resp) {
       if (err) this.log.info(err, 'Errors occured')
@@ -83,11 +87,13 @@ hemera.ready(() => {
       topic: 'dynamo-store',
       cmd: 'query',
       collection: 'test',
-      KeyConditionExpression: '#id = :value',
-      FilterExpression: '#name = :name',
-      ProjectionExpression: '#name,#city',
-      ExpressionAttributeNames: {'#name': 'name', '#city': 'city', '#id': 'id'},
-      ExpressionAttributeValues: {':name': 'John Doe', ':value': '1111'}
+      options: {
+        KeyConditionExpression: '#id = :value',
+        FilterExpression: '#name = :name',
+        ProjectionExpression: '#name,#city',
+        ExpressionAttributeNames: {'#name': 'name', '#city': 'city', '#id': 'id'},
+        ExpressionAttributeValues: {':name': 'John Doe', ':value': '1111'}
+      } 
     },
     function(err, resp) {
       if (err) this.log.info(err, 'Errors occured')
@@ -100,11 +106,12 @@ hemera.ready(() => {
       topic: 'dynamo-store',
       cmd: 'scan',
       collection: 'test',
-      FilterExpression: '#name = :name',
-      ProjectionExpression: '#name,#city',
-      ExpressionAttributeNames: {'#name': 'name', '#city': 'city'
-      },
-      ExpressionAttributeValues: {':name': 'John Doe', ':city': 'Skopje'}
+      options: {
+        FilterExpression: '#name = :name',
+        ProjectionExpression: '#name,#city',
+        ExpressionAttributeNames: {'#name': 'name', '#city': 'city'},
+        ExpressionAttributeValues: {':name': 'John Doe', ':city': 'Skopje'}
+      } 
     },
     function(err, resp) {
       if (err) this.log.info(err, 'Errors occured')

@@ -36,7 +36,7 @@ class DynamoStore extends Store {
       Item: req.data
     }
     this._driver.put(params, function (err, data) {
-      if (err) cb(err)
+      if (err) return err
       cb(null, params.Item)
     })
   }
@@ -58,7 +58,7 @@ class DynamoStore extends Store {
       ReturnValues: 'ALL_OLD'
     }
     this._driver.delete(params, function (err, data) {
-      if (err) cb(err)
+      if (err) return err
       cb(null, data)
     })
   }
@@ -72,19 +72,19 @@ class DynamoStore extends Store {
    * @memberOf DynamoStore
    */
   updateById(req, cb) {
-    const params = {
+    let params = {
       TableName: req.collection,
       Key: {
         'id': req.id
       },
-      UpdateExpression: req.UpdateExpression,
-      ConditionExpression: req.ConditionExpression,
-      ExpressionAttributeNames: req.ExpressionAttributeNames,
-      ExpressionAttributeValues: req.ExpressionAttributeValues,
       ReturnValues: 'ALL_NEW'
+    } 
+    if(req.options) {
+     params = Object.assign(params, req.options)
     }
+ 
     this._driver.update(params, function (err, data) {
-      if (err) cb(err)
+      if (err) return err
       cb(null, data)
     })
   }
@@ -98,13 +98,14 @@ class DynamoStore extends Store {
    * @memberOf DynamoStore
    */
   findById(req, cb) {
-    const params = {
+    let params = {
       TableName: req.collection,
       Key: {
         'id': req.id
-      },
-      ProjectionExpression: req.ProjectionExpression,
-      ExpressionAttributeNames: req.ExpressionAttributeNames
+      }
+    }
+    if(req.options) {
+     params = Object.assign(params, req.options)
     }
     this._driver.get(params, function (err, data) {
       if (err) cb(err)
@@ -122,16 +123,14 @@ class DynamoStore extends Store {
    */
 
   query(req, cb) {
-    const params = {
-      TableName: req.collection,
-      KeyConditionExpression: req.KeyConditionExpression,
-      FilterExpression: req.FilterExpression,
-      ProjectionExpression: req.ProjectionExpression,
-      ExpressionAttributeNames: req.ExpressionAttributeNames,
-      ExpressionAttributeValues: req.ExpressionAttributeValues
+    let params = {
+      TableName: req.collection
+    }
+    if(req.options) {
+     params = Object.assign(params, req.options)
     }
     this._driver.query(params, function (err, data) {
-      if (err) cb(err)
+      if (err) return err
       cb(null, data)
     })
   }
@@ -146,15 +145,14 @@ class DynamoStore extends Store {
    */
 
   scan(req, cb) {
-    const params = {
-      TableName: req.collection,
-      FilterExpression: req.FilterExpression,
-      ProjectionExpression: req.ProjectionExpression,
-      ExpressionAttributeNames: req.ExpressionAttributeNames,
-      ExpressionAttributeValues: req.ExpressionAttributeValues
+    let params = {
+      TableName: req.collection
+    }
+    if(req.options) {
+     params = Object.assign(params, req.options)
     }
     this._driver.scan(params, function (err, data) {
-      if (err) cb(err)
+      if (err) return err
       cb(null, data)
     })
   }

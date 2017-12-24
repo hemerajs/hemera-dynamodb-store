@@ -60,3 +60,5 @@ typings/
 # History files
 .history/
 
+# DynamoDb local files
+dynamodblocal-bin

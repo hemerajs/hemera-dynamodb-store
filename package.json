@@ -1,6 +1,6 @@
 {
   "name": "hemera-dynamodb-store",
-  "version": "1.0.0",
+  "version": "0.0.2",
   "description": "This is a plugin to use DynamoDb with Hemera",
   "main": "index.js",
   "scripts": {
@@ -29,7 +29,8 @@
   "dependencies": {
     "aws-sdk": "^2.173.0",
     "hemera-plugin": "^0.1.0",
-    "hemera-store": "^1.1.15"
+    "hemera-store": "^1.1.15",
+    "hemera-joi": "^3.0.0"
   },
   "devDependencies": {
     "code": "^5.1.2",
@@ -43,7 +44,6 @@
     "eslint-plugin-prettier": "^2.4.0",
     "eslint-plugin-promise": "^3.6.0",
     "eslint-plugin-standard": "^3.0.1",
-    "hemera-joi": "^3.0.0",
     "hemera-testsuite": "^1.4.1",
     "mocha": "^4.0.1",
     "nats": "^0.7.24",

@@ -6,3 +6,4 @@ docs
 packages
 node_modules
 media
+dynamodblocal-bin

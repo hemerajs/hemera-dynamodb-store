@@ -6,7 +6,7 @@ const HemeraDynamoStore = require('./../index')
 const HemeraJoi = require('hemera-joi')
 const Code = require('code')
 const HemeraTestsuite = require('hemera-testsuite')
-var DynamoDbLocal = require('dynamodb-local')
+const DynamoDbLocal = require('dynamodb-local')
 
 const expect = Code.expect
 
@@ -72,6 +72,10 @@ describe('Hemera-dynamo-store', function () {
       })
       hemera.ready(() => {
         console.log('Hemera is ready')
+        DynamoDbLocal.configureInstaller({
+          installPath: './dynamodblocal-bin',
+          downloadUrl: 'https://s3.eu-central-1.amazonaws.com/dynamodb-local-frankfurt/dynamodb_local_latest.tar.gz'
+        })
         DynamoDbLocal.launch(dynamoLocalPort, null, ['-sharedDb'])
           .then(function() {
             console.log('Dynamo db is active and listen on port: ' + dynamoLocalPort)
@@ -121,10 +125,12 @@ describe('Hemera-dynamo-store', function () {
         cmd: 'updateById',
         id: '000001',
         collection: testTable,
-        UpdateExpression: 'set #city = :city, #country = :country',
-        ConditionExpression: '#name = :name',
-        ExpressionAttributeNames: { '#name': 'name', '#city': 'city', '#country': 'country'},
-        ExpressionAttributeValues: { ':name': 'Test item is created', ':city': 'Skopje', ':country': 'Macedonia'}
+        options: {
+          UpdateExpression: 'set #city = :city, #country = :country',
+          ConditionExpression: '#name = :name',
+          ExpressionAttributeNames: { '#name': 'name', '#city': 'city', '#country': 'country'},
+          ExpressionAttributeValues: { ':name': 'Test item is created', ':city': 'Skopje', ':country': 'Macedonia'}
+        }
       },
       function(err, resp) {
         expect(err).to.be.not.exists()
@@ -147,8 +153,10 @@ describe('Hemera-dynamo-store', function () {
         cmd: 'findById',
         collection: testTable,
         id: '000001',
-        ProjectionExpression: '#name,#city',
-        ExpressionAttributeNames: {'#name': 'name', '#city': 'city'}
+        options: {
+          ProjectionExpression: '#name,#city',
+          ExpressionAttributeNames: {'#name': 'name', '#city': 'city'}
+        }
       },
       function(err, resp) {
         expect(err).to.be.not.exists()
@@ -205,6 +213,28 @@ describe('Hemera-dynamo-store', function () {
     )
   })
 
+   /* global it */
+  /* eslint no-undef: "error" */
+  it('scan-with-options', function(done) {
+    hemera.act(
+      {
+        topic: 'dynamo-store',
+        cmd: 'scan',
+        collection: testTable,
+        options: {
+          ProjectionExpression: '#name,#city',
+          ExpressionAttributeNames: {'#name': 'name', '#city': 'city'}
+        }
+      },
+      (err, resp) => {
+        expect(err).to.be.not.exists()
+        expect(resp.Items).to.have.length(2)
+        expect(resp.Items[0].name).to.equal('Test item is created')
+        done()
+      }
+    )
+  })
+
   /* global it */
   /* eslint no-undef: "error" */
   it('query', function(done) {
@@ -213,11 +243,13 @@ describe('Hemera-dynamo-store', function () {
         topic: 'dynamo-store',
         cmd: 'query',
         collection: testTable,
-        KeyConditionExpression: '#id = :id',
-        FilterExpression: '#city = :city',
-        ProjectionExpression: '#name,#city',
-        ExpressionAttributeNames: {'#id': 'id', '#name': 'name', '#city': 'city'},
-        ExpressionAttributeValues: {':city': 'Paris', ':id': '2'}
+        options: {
+          KeyConditionExpression: '#id = :id',
+          FilterExpression: '#city = :city',
+          ProjectionExpression: '#name,#city',
+          ExpressionAttributeNames: {'#id': 'id', '#name': 'name', '#city': 'city'},
+          ExpressionAttributeValues: {':city': 'Paris', ':id': '2'}
+        }
       },
       function(err, resp) {
         expect(err).to.be.not.exists()
@@ -230,13 +262,36 @@ describe('Hemera-dynamo-store', function () {
 
   /* global it */
   /* eslint no-undef: "error" */
+  it('query-error-test', function(done) {
+    hemera.act(
+      {
+        topic: 'dynamo-store',
+        cmd: 'query',
+        collection: testTable,
+        options: {
+          KeyConditionExpression: '#id = :id, pencil',
+          FilterExpression: '#city = :city',
+          ProjectionExpression: '#name,#city',
+          ExpressionAttributeNames: {'#id': 'id', '#name': 'name', '#city': 'city'},
+          ExpressionAttributeValues: {':city': 'Paris', ':id': '2'}
+        }
+      },
+      function(err, resp) {
+        expect(err).to.exists()
+        done()
+      }
+    )
+  })
+
+  /* global it */
+  /* eslint no-undef: "error" */
   it('removeById', function(done) {
     hemera.act(
       {
         topic: 'dynamo-store',
         cmd: 'removeById',
-        collection: testTable,
-        id: '2'
+        id: '2',
+        collection: testTable
       },
       function(err, resp) {
         expect(err).to.be.not.exists()
