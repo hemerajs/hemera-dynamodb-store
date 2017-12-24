@@ -213,7 +213,7 @@ describe('Hemera-dynamo-store', function () {
     )
   })
 
-   /* global it */
+  /* global it */
   /* eslint no-undef: "error" */
   it('scan-with-options', function(done) {
     hemera.act(

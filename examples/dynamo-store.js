@@ -57,7 +57,7 @@ hemera.ready(() => {
         ConditionExpression: '#name = :name',
         ExpressionAttributeNames: { '#name': 'name', '#city': 'city', '#country': 'country'},
         ExpressionAttributeValues: { ':name': 'John Doe', ':city': 'Skopje', ':country': 'Macedonia'}
-      }  
+      }
     },
     function(err, resp) {
       if (err) this.log.info(err, 'Errors occured')
@@ -74,7 +74,7 @@ hemera.ready(() => {
       options: {
         ProjectionExpression: '#name,#city',
         ExpressionAttributeNames: {'#name': 'name', '#city': 'city'}
-      }    
+      }
     },
     function(err, resp) {
       if (err) this.log.info(err, 'Errors occured')
@@ -93,7 +93,7 @@ hemera.ready(() => {
         ProjectionExpression: '#name,#city',
         ExpressionAttributeNames: {'#name': 'name', '#city': 'city', '#id': 'id'},
         ExpressionAttributeValues: {':name': 'John Doe', ':value': '1111'}
-      } 
+      }
     },
     function(err, resp) {
       if (err) this.log.info(err, 'Errors occured')
@@ -111,7 +111,7 @@ hemera.ready(() => {
         ProjectionExpression: '#name,#city',
         ExpressionAttributeNames: {'#name': 'name', '#city': 'city'},
         ExpressionAttributeValues: {':name': 'John Doe', ':city': 'Skopje'}
-      } 
+      }
     },
     function(err, resp) {
       if (err) this.log.info(err, 'Errors occured')
