@@ -7,6 +7,7 @@ const HemeraJoi = require('hemera-joi')
 const Code = require('code')
 const HemeraTestsuite = require('hemera-testsuite')
 const DynamoDbLocal = require('dynamodb-local')
+const AWS = require('aws-sdk')
 
 const expect = Code.expect
 
@@ -20,6 +21,10 @@ describe('Hemera-dynamo-store', function() {
   let server
   let hemera
   let testTable = 'testTable'
+
+  AWS.config.region = 'eu-west-2'
+  AWS.config.accessKeyId = 'fakeAccessKeyId'
+  AWS.config.secretAccessKey = 'fakeSecretAccessKey'
 
   const params = {
     TableName: testTable,
