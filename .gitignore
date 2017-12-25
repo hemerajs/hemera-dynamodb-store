@@ -57,3 +57,8 @@ typings/
 # dotenv environment variables file
 .env
 
+# History files
+.history/
+
+# DynamoDb local files
+dynamodblocal-bin
