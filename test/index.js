@@ -7,8 +7,12 @@ const HemeraJoi = require('hemera-joi')
 const Code = require('code')
 const HemeraTestsuite = require('hemera-testsuite')
 const DynamoDbLocal = require('dynamodb-local')
-
+const AWS = require('aws-sdk');
 const expect = Code.expect
+
+AWS.config.region = 'eu-west-2';
+AWS.config.accessKeyId= 'fakeAccessKeyId'
+AWS.config.secretAccessKey = 'fakeSecretAccessKey'
 
 /* global describe */
 /* eslint no-undef: "error" */

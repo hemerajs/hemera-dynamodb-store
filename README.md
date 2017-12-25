@@ -44,4 +44,4 @@ npm run test
 
 ## Examples
 
-[Here](https://aws.amazon.com/dynamodb/) you can find examples to see how to use it with Hemera 
+[Here](https://github.com/hemerajs/hemera-dynamodb-store/tree/master/examples) you can find examples to see how to use it with Hemera 
