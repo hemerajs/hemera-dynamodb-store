@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "lint": "eslint ./**/*.js",
-    "test": "nyc mocha -t 5000 --exit ./test/**/*.js",
+    "test": "nyc mocha --exit ./test/**/*.js",
     "coverage": "npm run test && nyc report --reporter=html",
     "patch": "np patch --yolo",
     "minor": "np minor --yolo",
