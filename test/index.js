@@ -12,7 +12,7 @@ const expect = Code.expect
 
 /* global describe */
 /* eslint no-undef: "error" */
-describe('Hemera-dynamo-store', function () {
+describe('Hemera-dynamo-store', function() {
   let PORT = 4222
   var dynamoLocalPort = 8000
   var authUrl = 'nats://localhost:' + PORT
@@ -23,14 +23,18 @@ describe('Hemera-dynamo-store', function () {
 
   const params = {
     TableName: testTable,
-    KeySchema: [{
-      AttributeName: 'id',
-      KeyType: 'HASH'
-    }],
-    AttributeDefinitions: [{
-      AttributeName: 'id',
-      AttributeType: 'S'
-    }],
+    KeySchema: [
+      {
+        AttributeName: 'id',
+        KeyType: 'HASH'
+      }
+    ],
+    AttributeDefinitions: [
+      {
+        AttributeName: 'id',
+        AttributeType: 'S'
+      }
+    ],
     ProvisionedThroughput: {
       ReadCapacityUnits: 5,
       WriteCapacityUnits: 5
@@ -74,13 +78,17 @@ describe('Hemera-dynamo-store', function () {
         console.log('Hemera is ready')
         DynamoDbLocal.configureInstaller({
           installPath: './dynamodblocal-bin',
-          downloadUrl: 'https://s3.eu-central-1.amazonaws.com/dynamodb-local-frankfurt/dynamodb_local_latest.tar.gz'
+          downloadUrl:
+            'https://s3.eu-central-1.amazonaws.com/dynamodb-local-frankfurt/dynamodb_local_latest.tar.gz'
         })
-        DynamoDbLocal.launch(dynamoLocalPort, null, ['-sharedDb'])
-          .then(function() {
-            console.log('Dynamo db is active and listen on port: ' + dynamoLocalPort)
+        DynamoDbLocal.launch(dynamoLocalPort, null, ['-sharedDb']).then(
+          function() {
+            console.log(
+              'Dynamo db is active and listen on port: ' + dynamoLocalPort
+            )
             setup(hemera.dynamoStore.createDb(), done)
-          })
+          }
+        )
       })
     })
   })
@@ -126,8 +134,16 @@ describe('Hemera-dynamo-store', function () {
         options: {
           UpdateExpression: 'set #city = :city, #country = :country',
           ConditionExpression: '#name = :name',
-          ExpressionAttributeNames: { '#name': 'name', '#city': 'city', '#country': 'country'},
-          ExpressionAttributeValues: { ':name': 'Test item is created', ':city': 'Skopje', ':country': 'Macedonia'}
+          ExpressionAttributeNames: {
+            '#name': 'name',
+            '#city': 'city',
+            '#country': 'country'
+          },
+          ExpressionAttributeValues: {
+            ':name': 'Test item is created',
+            ':city': 'Skopje',
+            ':country': 'Macedonia'
+          }
         }
       },
       function(err, resp) {
@@ -153,7 +169,7 @@ describe('Hemera-dynamo-store', function () {
         id: '000001',
         options: {
           ProjectionExpression: '#name,#city',
-          ExpressionAttributeNames: {'#name': 'name', '#city': 'city'}
+          ExpressionAttributeNames: { '#name': 'name', '#city': 'city' }
         }
       },
       function(err, resp) {
@@ -219,7 +235,7 @@ describe('Hemera-dynamo-store', function () {
         collection: testTable,
         options: {
           ProjectionExpression: '#name,#city',
-          ExpressionAttributeNames: {'#name': 'name', '#city': 'city'}
+          ExpressionAttributeNames: { '#name': 'name', '#city': 'city' }
         }
       },
       (err, resp) => {
@@ -243,8 +259,12 @@ describe('Hemera-dynamo-store', function () {
           KeyConditionExpression: '#id = :id',
           FilterExpression: '#city = :city',
           ProjectionExpression: '#name,#city',
-          ExpressionAttributeNames: {'#id': 'id', '#name': 'name', '#city': 'city'},
-          ExpressionAttributeValues: {':city': 'Paris', ':id': '2'}
+          ExpressionAttributeNames: {
+            '#id': 'id',
+            '#name': 'name',
+            '#city': 'city'
+          },
+          ExpressionAttributeValues: { ':city': 'Paris', ':id': '2' }
         }
       },
       function(err, resp) {
@@ -268,8 +288,12 @@ describe('Hemera-dynamo-store', function () {
           KeyConditionExpression: '#id = :id, pencil',
           FilterExpression: '#city = :city',
           ProjectionExpression: '#name,#city',
-          ExpressionAttributeNames: {'#id': 'id', '#name': 'name', '#city': 'city'},
-          ExpressionAttributeValues: {':city': 'Paris', ':id': '2'}
+          ExpressionAttributeNames: {
+            '#id': 'id',
+            '#name': 'name',
+            '#city': 'city'
+          },
+          ExpressionAttributeValues: { ':city': 'Paris', ':id': '2' }
         }
       },
       function(err, resp) {

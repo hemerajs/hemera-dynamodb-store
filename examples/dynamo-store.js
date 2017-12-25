@@ -55,8 +55,16 @@ hemera.ready(() => {
       options: {
         UpdateExpression: 'set #city = :city, #country = :country',
         ConditionExpression: '#name = :name',
-        ExpressionAttributeNames: { '#name': 'name', '#city': 'city', '#country': 'country'},
-        ExpressionAttributeValues: { ':name': 'John Doe', ':city': 'Skopje', ':country': 'Macedonia'}
+        ExpressionAttributeNames: {
+          '#name': 'name',
+          '#city': 'city',
+          '#country': 'country'
+        },
+        ExpressionAttributeValues: {
+          ':name': 'John Doe',
+          ':city': 'Skopje',
+          ':country': 'Macedonia'
+        }
       }
     },
     function(err, resp) {
@@ -73,7 +81,7 @@ hemera.ready(() => {
       collection: 'test',
       options: {
         ProjectionExpression: '#name,#city',
-        ExpressionAttributeNames: {'#name': 'name', '#city': 'city'}
+        ExpressionAttributeNames: { '#name': 'name', '#city': 'city' }
       }
     },
     function(err, resp) {
@@ -91,8 +99,12 @@ hemera.ready(() => {
         KeyConditionExpression: '#id = :value',
         FilterExpression: '#name = :name',
         ProjectionExpression: '#name,#city',
-        ExpressionAttributeNames: {'#name': 'name', '#city': 'city', '#id': 'id'},
-        ExpressionAttributeValues: {':name': 'John Doe', ':value': '1111'}
+        ExpressionAttributeNames: {
+          '#name': 'name',
+          '#city': 'city',
+          '#id': 'id'
+        },
+        ExpressionAttributeValues: { ':name': 'John Doe', ':value': '1111' }
       }
     },
     function(err, resp) {
@@ -109,8 +121,8 @@ hemera.ready(() => {
       options: {
         FilterExpression: '#name = :name',
         ProjectionExpression: '#name,#city',
-        ExpressionAttributeNames: {'#name': 'name', '#city': 'city'},
-        ExpressionAttributeValues: {':name': 'John Doe', ':city': 'Skopje'}
+        ExpressionAttributeNames: { '#name': 'name', '#city': 'city' },
+        ExpressionAttributeValues: { ':name': 'John Doe', ':city': 'Skopje' }
       }
     },
     function(err, resp) {

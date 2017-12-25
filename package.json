@@ -4,9 +4,12 @@
   "description": "This is a plugin to use DynamoDb with Hemera",
   "main": "index.js",
   "scripts": {
-    "lint": "eslint ./**/*.js --fix",
-    "test": "./node_modules/.bin/nyc ./node_modules/.bin/mocha test/*.js",
-    "coverage": "npm run test && ./node_modules/.bin/nyc report --reporter=html"
+    "lint": "eslint ./**/*.js",
+    "test": "nyc mocha -t 5000 --exit ./test/**/*.js",
+    "coverage": "npm run test && nyc report --reporter=html",
+    "patch": "np patch --yolo",
+    "minor": "np minor --yolo",
+    "major": "np major --yolo"
   },
   "repository": {
     "type": "git",
@@ -47,7 +50,8 @@
     "hemera-testsuite": "2.0.x",
     "mocha": "4.0.x",
     "nats": "0.7.x",
-    "nats-hemera": "3.0.x",
+    "nats-hemera": "3.1.x",
+    "np": "^2.18.3",
     "nyc": "11.4.x",
     "prettier": "1.9.x"
   }
