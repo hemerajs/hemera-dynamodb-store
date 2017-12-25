@@ -46,4 +46,12 @@ npm run test
 
 ## Examples
 
-[Here](https://aws.amazon.com/dynamodb/) you can find examples to see how to use it with Hemera 
+[Here](https://aws.amazon.com/dynamodb/) you can find examples to see how to use it with Hemera
+
+## API
+
+See [Store](https://github.com/hemerajs/hemera/tree/master/packages/hemera-store) Interface.
+
+## Dependencies
+
+- hemera-joi
