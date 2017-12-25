@@ -1,5 +1,7 @@
 # Hemera-dynamodb-store package
 
+[![Build Status](https://travis-ci.org/hemerajs/hemera-dynamodb-store.svg?branch=master)](https://travis-ci.org/hemerajs/hemera-dynamodb-store)
+[![npm](https://img.shields.io/npm/v/hemera-dynamodb-store.svg?maxAge=3600)](https://www.npmjs.com/package/hemera-dynamodb-store)
 [![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg)](#badge)
 
 This is a plugin to use [DynamoDB](https://aws.amazon.com/dynamodb/) with Hemera 
