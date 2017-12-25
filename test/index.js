@@ -108,9 +108,7 @@ describe('Hemera-dynamo-store', function () {
       },
       (err, resp) => {
         expect(err).to.be.not.exists()
-        expect(resp.id).to.be.a.string()
-        expect(resp.id).to.equal('000001')
-        expect(resp.name).to.be.a.string()
+        expect(resp).to.be.an.object()
         done()
       }
     )
@@ -187,9 +185,7 @@ describe('Hemera-dynamo-store', function () {
       },
       (err, resp) => {
         expect(err).to.be.not.exists()
-        expect(resp.id).to.be.a.string()
-        expect(resp.id).to.equal('2')
-        expect(resp.name).to.be.a.string()
+        expect(resp).to.be.an.object()
         done()
       }
     )

@@ -39,8 +39,8 @@ class DynamoStore extends Store {
       if (err){
         cb(err)
         return
-      } 
-      cb(null, params.Item)
+      }
+      cb(null, data)
     })
   }
 
