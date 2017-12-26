@@ -9,15 +9,12 @@ function hemeraDynamoStore(hemera, opts, done) {
   let topic = 'dynamo-store'
   let Joi = hemera.joi
 
-  const dynamo = new AWS.DynamoDB(opts.dynamodb)
-  const db = new AWS.DynamoDB.DocumentClient(opts.dynamodb, dynamo)
-
-  function createDb() {
-    return dynamo
-  }
+  const client = new AWS.DynamoDB(opts.dynamodb)
+  const db = new AWS.DynamoDB.DocumentClient(opts.dynamodb, client)
 
   hemera.decorate('dynamoStore', {
-    createDb
+    db,
+    client
   })
 
   hemera.add(StorePattern.create(topic), function(req, cb) {

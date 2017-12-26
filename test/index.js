@@ -91,7 +91,7 @@ describe('Hemera-dynamo-store', function() {
             console.log(
               'Dynamo db is active and listen on port: ' + dynamoLocalPort
             )
-            setup(hemera.dynamoStore.createDb(), done)
+            setup(hemera.dynamoStore.client, done)
           }
         )
       })
