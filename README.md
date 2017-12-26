@@ -46,7 +46,7 @@ npm run test
 
 ## Examples
 
-[Here](https://aws.amazon.com/dynamodb/) you can find examples to see how to use it with Hemera
+[Here](/examples) you can find some examples.
 
 ## API
 
