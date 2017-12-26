@@ -254,11 +254,11 @@ describe('Hemera-dynamo-store', function() {
 
   /* global it */
   /* eslint no-undef: "error" */
-  it('query', function(done) {
+  it('find', function(done) {
     hemera.act(
       {
         topic: 'dynamo-store',
-        cmd: 'query',
+        cmd: 'find',
         collection: testTable,
         options: {
           KeyConditionExpression: '#id = :id',
@@ -276,6 +276,59 @@ describe('Hemera-dynamo-store', function() {
         expect(err).to.be.not.exists()
         expect(resp.Items).to.have.length(1)
         expect(resp.Items[0].city).to.equal('Paris')
+        done()
+      }
+    )
+  })
+
+  /* global it */
+  /* eslint no-undef: "error" */
+  it('count', function(done) {
+    hemera.act(
+      {
+        topic: 'dynamo-store',
+        cmd: 'count',
+        collection: testTable,
+        query: {
+          KeyConditionExpression: '#id = :id',
+          FilterExpression: '#city = :city',
+          ExpressionAttributeNames: {
+            '#id': 'id',
+            '#city': 'city'
+          },
+          ExpressionAttributeValues: { ':city': 'Paris', ':id': '2' }
+        }
+      },
+      function(err, resp) {
+        expect(err).to.be.not.exists()
+        expect(resp.Count).to.be.equals(1)
+        expect(resp.ScannedCount).to.be.equals(1)
+        done()
+      }
+    )
+  })
+
+  /* global it */
+  /* eslint no-undef: "error" */
+  it('exists', function(done) {
+    hemera.act(
+      {
+        topic: 'dynamo-store',
+        cmd: 'exists',
+        collection: testTable,
+        query: {
+          KeyConditionExpression: '#id = :id',
+          FilterExpression: '#city = :city',
+          ExpressionAttributeNames: {
+            '#id': 'id',
+            '#city': 'city'
+          },
+          ExpressionAttributeValues: { ':city': 'Paris', ':id': '2' }
+        }
+      },
+      function(err, resp) {
+        expect(err).to.be.not.exists()
+        expect(resp).to.be.true()
         done()
       }
     )
