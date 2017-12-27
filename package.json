@@ -31,9 +31,9 @@
   "homepage": "https://github.com/hemerajs/hemera-dynamodb-store#readme",
   "dependencies": {
     "aws-sdk": "2.175.x",
+    "hemera-joi": "3.0.x",
     "hemera-plugin": "0.1.x",
-    "hemera-store": "1.1.x",
-    "hemera-joi": "3.0.x"
+    "hemera-store": "1.1.x"
   },
   "devDependencies": {
     "code": "^3.0.2",

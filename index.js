@@ -157,14 +157,14 @@ function hemeraDynamoStore(hemera, opts, done) {
   done()
 }
 
-const plugin = Hp(hemeraDynamoStore, '>=3')
-plugin[Symbol.for('name')] = require('./package.json').name
-plugin[Symbol.for('options')] = {
-  payloadValidator: 'hemera-joi',
-  dynamodb: {
-    endpoint: 'http://localhost:8000',
-    region: 'eu-west-2'
+module.exports = Hp(hemeraDynamoStore, {
+  hemera: '>=3',
+  name: require('./package.json').name,
+  options: {
+    payloadValidator: 'hemera-joi',
+    dynamodb: {
+      endpoint: 'http://localhost:8000',
+      region: 'eu-west-2'
+    }
   }
-}
-plugin[Symbol.for('dependencies')] = ['hemera-joi']
-module.exports = plugin
+})
