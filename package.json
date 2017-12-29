@@ -30,7 +30,7 @@
   },
   "homepage": "https://github.com/hemerajs/hemera-dynamodb-store#readme",
   "dependencies": {
-    "aws-sdk": "2.175.x",
+    "aws-sdk": "2.176.0",
     "hemera-joi": "3.0.x",
     "hemera-plugin": "0.1.x",
     "hemera-store": "1.1.x"
@@ -38,19 +38,12 @@
   "devDependencies": {
     "code": "^3.0.2",
     "dynamodb-local": "^0.0.18",
-    "eslint": "4.13.x",
-    "eslint-config-prettier": "^2.9.0",
-    "eslint-config-standard": "11.0.0-beta.0",
-    "eslint-plugin-import": "^2.8.0",
-    "eslint-plugin-mocha": "^4.11.0",
-    "eslint-plugin-node": "^5.2.1",
-    "eslint-plugin-prettier": "^2.4.0",
-    "eslint-plugin-promise": "^3.6.0",
-    "eslint-plugin-standard": "^3.0.1",
+    "eslint": "^4.14.0",
+    "eslint-config-hemera": "0.0.1",
     "hemera-testsuite": "^2.0.5",
-    "mocha": "^4.0.1",
+    "mocha": "^4.1.0",
     "nats": "^0.7.24",
-    "nats-hemera": "^3.1.2",
+    "nats-hemera": "^3.1.3",
     "np": "^2.18.3",
     "nyc": "^11.4.1",
     "prettier": "^1.9.2"
